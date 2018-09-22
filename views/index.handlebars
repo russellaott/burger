@@ -1,0 +1,48 @@
+<h1>Eat Da Burger!</h1>
+<br>
+<!-- div to hold our burger menu  -->
+    <div id='burgerMenu'>
+        <h2>Burger Menu:</h2>
+        <!-- list that will show each burger available unless it has been devoured  -->
+        <ul>
+            {{#each burgers}}
+             {{#unless this.devoured}}
+            <li>
+                {{this.id}}. 
+                {{this.burger_name}}
+
+                <form action="/{{this.id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="devoured" value="false">
+                    <button class="btn btn-danger" type="submit">Devour it!</button>
+                </form>
+
+            </li>
+            {{/unless}} {{/each}}
+        </ul>
+    </div>
+    <!-- div that holds our eaten burgers menu  -->
+    <div id='burgerEaten'>
+        <h2>Eaten burgers: </h2>
+        <!-- lsit that will show each of our eaten or devoured burgers  -->
+        <ul>
+            {{#each burgers}} 
+            {{#if this.devoured}}
+            <li>
+                {{this.id}}. 
+                {{this.burger_name}}
+            </li>
+            {{/if}} {{/each}}
+        </ul>
+    </div>
+<!-- div that contains our form which will allow users to add a burger to the burger list and database  -->
+<div id='burgerAdd'>
+    <h2>Add a Burger: </h2>
+
+    <form class="create-update-form" action="/" method="POST">
+        <div class="form-group">
+            <label for="dab">Burger Name:</label>
+            <input type="text" id="dab" name="burger_name">
+        </div>
+        <button class="btn btn-primary" type="submit">Add!</button>
+    </form>
+</div>
